@@ -3,6 +3,7 @@ Generate Visual Artifacts: Hypnogram & Confusion Matrix Heatmap
 Author: Rishi Maruvada
 """
 
+import os
 import mne
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,6 +11,11 @@ from mne.datasets.sleep_physionet.age import fetch_data
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
+
+# Ensure outputs directory exists
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_DIR = os.path.join(BASE_DIR, "outputs")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 print("[*] Loading dataset and extracting features...")
 [paths] = fetch_data(subjects=[0], recording=[1])
@@ -107,8 +113,9 @@ for i in range(cm.shape[0]):
         )
 
 plt.tight_layout()
-plt.savefig("confusion_matrix.png")
-print("[+] Saved confusion_matrix.png")
+cm_path = os.path.join(OUTPUT_DIR, "confusion_matrix.png")
+plt.savefig(cm_path)
+print(f"[+] Saved {cm_path}")
 
 # =====================================================================
 # PLOT 2: THE HYPNOGRAM (TIME-SERIES SLEEP ARCHITECTURE)
@@ -137,6 +144,7 @@ ax2.set_ylabel("Stage")
 ax2.grid(True, linestyle='--', alpha=0.5)
 
 plt.tight_layout()
-plt.savefig("hypnogram_comparison.png")
-print("[+] Saved hypnogram_comparison.png")
+hypno_path = os.path.join(OUTPUT_DIR, "hypnogram_comparison.png")
+plt.savefig(hypno_path)
+print(f"[+] Saved {hypno_path}")
 print("[+] Visuals generated successfully!")

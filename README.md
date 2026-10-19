@@ -66,7 +66,7 @@ In clinical sleep medicine, N1 (drowsiness) and REM (dreaming) share near-identi
 
 ```bash
 # Clone the repository
-git clone [https://github.com/rishimaruvada/sleep-stage-classifier.git](https://github.com/rishimaruvada/sleep-stage-classifier.git)
+git clone https://github.com/Rishi-Maruvada/sleep-stage-classifier.git
 cd sleep-stage-classifier
 
 # Install dependencies
@@ -74,3 +74,4 @@ pip install -r requirements.txt
 
 # Run end-to-end pipeline
 python3 main.py
+```
